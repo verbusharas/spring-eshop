@@ -4,23 +4,47 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Pridėti naują vartotoją</title>
+    <title th:text="#{user.new.title}">Naujo Vartotojo Pridėjimas</title>
 </head>
 <body>
 
-<h3>Pridėti nują vartotoją</h3>
-<form th:action="@{/user}" method="POST" th:object="${user}" class="hasError"}>
-    <label for="tfUsername" th:text="'Slapyvardis:'">Slapyvardis:</label>
-    <input id="tfUsername"type="text" th:field="*{username}" class="hasError"/>
-    <label for="tfPassword" th:text="'Slaptažodis:'">Slaptažodis:</label>
-    <input id="tfPassword" type="password" th:field="*{password}" class="hasError"/>
-    <label for="tfPhoneNo" th:text="'Telefono Nr.:'">Telefono Nr.:</label>
-    <input id="tfPhoneNo" type="text" th:field="*{phone}" th:errors="*{phone}" class="hasError"/>
-    <label for="tfAvatar" th:text="'Avataro URL:'">Avataro URL:</label>
-    <input id="tfAvatar" type="text" th:field="*{avatar}" class="hasError">
-    <input type="submit" value="Saugoti">
+<div class="parent-container">
+    <form th:action="@{/user}" method="POST" th:object="${user}">
 
-</form>
+        <div class="container-fluid">
+            <h1 th:text="#{user.new.title}">Naujas vartotojas</h1>
+
+            <div class="form-group">
+                <label th:text="#{user.new.username}" for="tfUsername">Vartotojo vardas</label>
+                <input class="form-control" id="tfUsername" type="text" th:field="*{username}"/>
+                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"
+                     role="alert"></div>
+
+                <label th:text="#{user.new.password}" for="tfPassword">Slaptažodis</label>
+                <input class="form-control" id="tfPassword" type="password" th:field="*{password}"/>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"
+                     role="alert"></div>
+
+                <label th:text="#{user.new.phone}" for="tfPhoneNo">Telefono Nr.</label>
+                <input id="tfPhoneNo" type="text" th:field="*{phone}" th:errors="*{phone}"/>
+                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="alert alert-danger"
+                     role="alert"></div>
+
+                <label th:text="#{user.new.zip}" for="tfZip">Pašto kodas</label>
+                <input id="tfZip" type="text" th:field="*{zip}" th:errors="*{zip}"/>
+                <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}" class="alert alert-danger"
+                     role="alert"></div>
+
+
+                <label th:text="#{user.new.avatar}" for="tfAvatar" >Paveikslėlio URL</label>
+                <input class="form-control" id="tfAvatar" type="text" th:field="*{avatar}">
+                <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="alert alert-danger"
+                     role="alert"></div>
+            </div>
+            <button class="btn btn-primary" type="submit" th:text="#{user.new.save}">Saugoti</button>
+        </div>
+    </form>
+</div>
 
 
 </body>

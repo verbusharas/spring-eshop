@@ -111,7 +111,7 @@
         <span th:text="#{product.table.total} + ': ' + ${productsPage.getTotalElements()}"></span>
         <th:block th:each="pageNumber: ${#numbers.sequence(0, productsPage.totalPages-1)}">
             <a class='btn text-info' th:classappend="${pageNumber == productsPage.number ? 'disabled' : ''}"
-               th:href="@{/templates/product?page={pn}&size={size}(pn=${pageNumber}, size=${productsPage.size})}"
+               th:href="@{/product?page={pn}&size={size}(pn=${pageNumber}, size=${productsPage.size})}"
                th:text="${pageNumber+1}">3</a></li>
 
         </th:block>
@@ -119,11 +119,7 @@
 
 
 </div>
-<!--<script th:inline="javascript">-->
-<!--    document.getElementById("btn-add").addEventListener("click", () => {-->
-<!--        window.location = "/product/new";-->
-<!--    })-->
-<!--</script>-->
+
 </body>
 
 </html>
