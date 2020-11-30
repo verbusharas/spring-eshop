@@ -1,8 +1,8 @@
 package lt.verbus.eshop.user.controller;
 
-import lt.verbus.eshop.user.exception.UserNotFoundException;
 import lt.verbus.eshop.user.model.User;
 import lt.verbus.eshop.user.service.UserService;
+import lt.verbus.eshop.user.service.validator.UserExtraValidator;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -21,26 +21,28 @@ import javax.validation.Valid;
 public class UserController {
 
     private UserService userService;
+    private UserExtraValidator userExtraValidator;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserExtraValidator userExtraValidator) {
         this.userService = userService;
+        this.userExtraValidator = userExtraValidator;
     }
 
     @GetMapping
-    public String getAll(@PageableDefault(size=5) Pageable pageable, Model model){
+    public String getAll(@PageableDefault(size = 5) Pageable pageable, Model model) {
         model.addAttribute("users", userService.getAllUsers(pageable));
         return "user/user-list";
     }
 
     @GetMapping("/new")
-    public String getNewUserForm(Model model){
+    public String getNewUserForm(Model model) {
         model.addAttribute("user", new User());
         return "user/new-user";
     }
 
     @PostMapping
-    public String addNewUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
+    public String addNewUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "user/new-user";
         }
 
@@ -48,7 +50,28 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @GetMapping("/{id}")
+    public String getUserProfile(@PathVariable long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user/user-profile";
+    }
 
+    @GetMapping("/update/{id}")
+    public String getUpdateUserForm(Model model, @PathVariable long id) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "user/edit-user";
+    }
+
+
+    @PostMapping("/{id}")
+    public String updateUser(@PathVariable long id, BindingResult bindingResult, @ModelAttribute("user") User user) {
+        userExtraValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "user/edit-user";
+        }
+        userService.updateUser(id, user);
+        return "redirect:/user/" + id;
+    }
 
 
 }
