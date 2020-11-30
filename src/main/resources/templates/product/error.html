@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet" />
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com}">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;500&display=swap}" rel="stylesheet">
+    <title>Klaida!</title>
+</head>
+<body>
+<h1 th:text="${'Oi! Įvyko klaida :('}"></h1>
+<div class="product-info">
+<!--    <p th:text="${error.getMessage}"></p>-->
+</div>
+</body>
+</html>

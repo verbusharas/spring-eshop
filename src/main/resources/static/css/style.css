@@ -1,0 +1,29 @@
+th{
+    border:none !important;
+}
+.parent-container {
+    width: 30%;
+}
+
+.spaced {
+    padding-left: 10px;
+}
+
+.hasError {
+    color: red !important;
+}
+
+.btn-add {
+    font-size: large;
+}
+
+.btn-add:hover {
+
+    cursor: pointer;
+    background-color: rgb(82, 82, 82)  !important;
+}
+
+.current-page {
+    text-decoration: none !important;
+    color: red !important;
+}

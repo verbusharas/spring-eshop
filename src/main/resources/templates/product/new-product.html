@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet"/>
+    <title th:text="#{product.new.title}">Naujo Produkto Pridėjimas</title>
+
+</head>
+<body>
+
+
+<div class="parent-container">
+    <form th:action="@{/product/new}" method="POST" th:object="${product}">
+
+        <div class="container-fluid">
+            <h1 th:text="#{product.new.title}">Naujas Produktas</h1>
+            <div class="form-group">
+                <label th:text="#{product.table.name}" for="tfName">Pavadinimas:</label>
+                <input class="form-control" id="tfName" type="text" th:field="*{name}"/><br/>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger" role="alert"></div>
+
+                <label th:text="#{product.table.in-stock}" for="tfInstock">Likęs kiekis:</label>
+                <input class="form-control" id="tfInstock" type="number" th:field="*{inStock}"/><br/>
+                <div th:if="${#fields.hasErrors('inStock')}" th:errors="*{inStock}" class="alert alert-danger" role="alert"></div>
+
+
+                <label th:text="#{product.table.price}" for="tfPrice">Kaina:</label>
+                <input class="form-control" id="tfPrice" type="number" th:field="*{price}"/><br/>
+                <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="alert alert-danger" role="alert"></div>
+
+                <label th:text="#{product.edit.description}" for="tfDescription">Aprašymas:</label>
+                <textarea class="form-control" id="tfDescription" th:field="*{description}"></textarea><br/>
+                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger" role="alert"></div>
+
+            </div>
+            <button class="btn btn-primary" type="submit" th:text="#{product.edit.save}"/>
+        </div>
+
+    </form>
+</div>
+
+
+</body>
+</html>

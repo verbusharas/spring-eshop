@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Pridėti naują vartotoją</title>
+</head>
+<body>
+
+<h3>Pridėti nują vartotoją</h3>
+<form th:action="@{/user}" method="POST" th:object="${user}" class="hasError"}>
+    <label for="tfUsername" th:text="'Slapyvardis:'">Slapyvardis:</label>
+    <input id="tfUsername"type="text" th:field="*{username}" class="hasError"/>
+    <label for="tfPassword" th:text="'Slaptažodis:'">Slaptažodis:</label>
+    <input id="tfPassword" type="password" th:field="*{password}" class="hasError"/>
+    <label for="tfPhoneNo" th:text="'Telefono Nr.:'">Telefono Nr.:</label>
+    <input id="tfPhoneNo" type="text" th:field="*{phone}" th:errors="*{phone}" class="hasError"/>
+    <label for="tfAvatar" th:text="'Avataro URL:'">Avataro URL:</label>
+    <input id="tfAvatar" type="text" th:field="*{avatar}" class="hasError">
+    <input type="submit" value="Saugoti">
+
+</form>
+
+
+</body>
+</html>
