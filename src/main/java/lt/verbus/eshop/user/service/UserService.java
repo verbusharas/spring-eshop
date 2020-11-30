@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,6 +32,15 @@ public class UserService {
     public Page<User> getAllUsers(Pageable pageable){
         return userRepository.findAll(pageable);
     }
+
+    public void updateUser(Long id, User newUser){
+        User existingUser = getUserById(id);
+        //FIXME: Use mapper or BeanUtil.
+        existingUser.setPhone(newUser.getPhone());
+        existingUser.setPhone(newUser.getZip());
+        userRepository.save(existingUser);
+    }
+
 
 
 }

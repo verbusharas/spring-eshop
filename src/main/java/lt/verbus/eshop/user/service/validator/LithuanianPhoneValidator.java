@@ -3,6 +3,8 @@ package lt.verbus.eshop.user.service.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import static lt.verbus.eshop.util.StringUtil.areCharsDigits;
+
 
 public class LithuanianPhoneValidator implements ConstraintValidator<LithuanianPhoneNumber, String> {
 
@@ -27,11 +29,5 @@ public class LithuanianPhoneValidator implements ConstraintValidator<LithuanianP
         return false;
     }
 
-    /**
-     * Checks if last 7 chars are digits
-     */
-    private boolean areCharsDigits(String value) {
-        return value.matches("\\d+");
-    }
 
 }

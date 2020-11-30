@@ -43,14 +43,12 @@ public class UserController {
         if (bindingResult.hasErrors()){
             return "user/new-user";
         }
+
+        userService.addUser(user);
         return "redirect:/user";
     }
 
 
-    @GetMapping("/{id}")
-    public String test(@PathVariable long id){
-        throw new UserNotFoundException();
-    }
 
 
 }

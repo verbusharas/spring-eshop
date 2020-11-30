@@ -2,6 +2,8 @@ package lt.verbus.eshop.user.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.verbus.eshop.user.service.validator.LithuanianPhoneNumber;
+import lt.verbus.eshop.user.service.validator.LithuanianZipCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
