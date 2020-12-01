@@ -1,8 +1,10 @@
 package lt.verbus.eshop.user.controller;
 
+import lt.verbus.eshop.product.model.Product;
 import lt.verbus.eshop.user.model.User;
 import lt.verbus.eshop.user.service.UserService;
 import lt.verbus.eshop.user.service.validator.UserExtraValidator;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,9 @@ public class UserController {
     }
 
     @GetMapping
-    public String getAll(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        model.addAttribute("users", userService.getAllUsers(pageable));
+    public String getAllUsers(@PageableDefault(size = 5) Pageable pageable, Model model) {
+        Page<User> pageOfUsers = userService.getAllUsers(pageable);
+        model.addAttribute("usersPage", pageOfUsers);
         return "user/user-list";
     }
 

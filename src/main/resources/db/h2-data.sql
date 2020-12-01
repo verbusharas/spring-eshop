@@ -29,3 +29,10 @@ INSERT INTO PRODUCTS (product_name, in_stock, price, description) VALUES
 ('Ergonomic Paper Lamp', 36, 55.26, 'Color: green, material: Automotive, made in Mongolia'),
 ('Ergonomic Iron Table', 84, 33.7, 'Color: red, material: Outdoors, made in Albania'),
 ('Practical Silk Knife', 60, 97.53, 'Color: turquoise, material: Automotive & Sports, made in Peru');
+
+
+INSERT INTO USERS (username, password, phone, zip, avatar) VALUES
+  ('JurgisTheGeorge', '111d0c2d-99d0-4ec9-9e68-0c7a35895ef5', '+37060011111', 'LT-01110', 'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
+('iron_lady', '222d0c2d-99d0-4ec9-9e68-0c7a35895ef6', '+37060022222', 'LT-02220', 'https://img.freepik.com/free-vector/comic-pretty-girl-with-gasses-halftone-background_225004-835.jpg'),
+('mrpresident', '333d0c2d-99d0-4ec9-9e68-0c7a35895ef7', '+37060033333', 'LT-03330', 'https://i1.sndcdn.com/avatars-000739602577-f2zecu-t500x500.jpg'),
+('gulag2021', '444d0c2d-99d0-4ec9-9e68-0c7a35895ef8', '+37060044444', 'LT-04440', 'https://avatarfiles.alphacoders.com/224/224752.png');

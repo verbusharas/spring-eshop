@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title th:text="#{user.profile.title}">Vartotojo Profilis</title>
+</head>
+<body>
+<div class="container">
+    <div class="card" th:object="${user}">
+        <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+                <img th:if="*{avatar == null}" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                <img th:if="*{avatar != null}" th:src="*{avatar}" alt="my avatar" class="rounded-circle" width="150">
+                <div class="mt-3">
+                    <h4 th:text="*{username}"></h4>
+                    <p class="text-secondary mb-1" th:text="*{phone}"></p>
+                    <p class="text-muted font-size-sm" th:text="*{zip}"></p>
+                </div>
+                <div class="mt-1">
+                    <a th:href="@{/user}"><button class="btn btn-bg bg-secondary text-white">Vartotoju sarasas</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

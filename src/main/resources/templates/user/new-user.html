@@ -26,17 +26,16 @@
                      role="alert"></div>
 
                 <label th:text="#{user.new.phone}" for="tfPhoneNo">Telefono Nr.</label>
-                <input id="tfPhoneNo" type="text" th:field="*{phone}" th:errors="*{phone}"/>
+                <input class="form-control" id="tfPhoneNo" type="text" th:field="*{phone}"/>
                 <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="alert alert-danger"
                      role="alert"></div>
 
                 <label th:text="#{user.new.zip}" for="tfZip">Pašto kodas</label>
-                <input id="tfZip" type="text" th:field="*{zip}" th:errors="*{zip}"/>
+                <input class="form-control" id="tfZip" type="text" th:field="*{zip}"/>
                 <div th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}" class="alert alert-danger"
                      role="alert"></div>
 
-
-                <label th:text="#{user.new.avatar}" for="tfAvatar" >Paveikslėlio URL</label>
+                <label th:text="#{user.new.avatar}" for="tfAvatar">Paveikslėlio URL</label>
                 <input class="form-control" id="tfAvatar" type="text" th:field="*{avatar}">
                 <div th:if="${#fields.hasErrors('avatar')}" th:errors="*{avatar}" class="alert alert-danger"
                      role="alert"></div>

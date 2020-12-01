@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.15.1/css/all.css}"
+          integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+    <title th:text="#{user.table.title}">Vartotojų Sąrašas</title>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="#{user.table.title}">Vartotojų sąrašas:</h1>
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">
+                <a class="btn text-dark font-weight-bold disabled">
+                <span th:text="ID">
+                    ID
+                </span>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-dark font-weight-bold"
+                   th:with="direction=${usersPage.sort.getOrderFor('username')?.direction}"
+                   th:href="@{?sort=username,{dir}(dir=${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
+                    <span th:text="#{user.table.username}">
+                        Vartotojo Vardas
+                    </span>
+                    <i th:if="${direction != null}"
+                       class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-dark font-weight-bold disabled">
+                <span th:text="#{user.table.password}">
+                    Slaptažodis
+                </span>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-dark font-weight-bold"
+                   th:with="direction=${usersPage.sort.getOrderFor('phone')?.direction}"
+                   th:href="@{?sort=phone,{dir}(dir=${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
+                    <span th:text="#{user.table.phone}">
+                        Telefono Nr.
+                    </span>
+                    <i th:if="${direction != null}"
+                       class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-dark font-weight-bold"
+                   th:with="direction=${usersPage.sort.getOrderFor('zip')?.direction}"
+                   th:href="@{?sort=zip,{dir}(dir=${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
+                    <span th:text="#{user.table.zip}">
+                        Pašto kodas
+                    </span>
+                    <i th:if="${direction != null}"
+                       class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-darklight font-weight-bold disabled">
+                <span th:text="#{user.table.avatar}">
+                    Paveikslėlio URL
+                </span>
+                </a>
+            </th>
+
+            <th scope="col">
+                <a class="btn text-warning font-weight-bold" th:href="@{'/user/new'}">
+                <span th:text="'+'">
+                    +
+                </span>
+                </a>
+            </th>
+
+        </tr>
+        </thead>
+
+        <th:block th:if="${usersPage.empty}">
+            <p>Vartotojų nėra</p>
+        </th:block>
+        <th:block th:if="${not usersPage.empty}">
+
+            <tbody>
+            <tr th:each="user: ${usersPage}">
+                <th scope="row" th:text="${user.id}"></th>
+                <td><a th:href="@{'/user/' + ${user.id}}" class="btn text-info" th:text="${user.username}"></a>
+                </td>
+                <td th:text="${user.password.length()>15?user.password.substring(0,15) + '...': user.password}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.zip}"></td>
+                <td th:text="${user.avatar.length()>30?user.avatar.substring(0,30) + '...': user.avatar}"></td>
+            </tr>
+            </tbody>
+
+        </th:block>
+    </table>
+
+
+    <div>
+        <span th:text="#{user.table.total} + ': ' + ${usersPage.getTotalElements()}"></span>
+        <th:block th:each="pageNumber: ${#numbers.sequence(0, usersPage.totalPages-1)}">
+            <a class='btn text-info' th:classappend="${pageNumber == usersPage.number ? 'disabled' : ''}"
+               th:href="@{/user?page={pn}&size={size}(pn=${pageNumber}, size=${usersPage.size})}"
+               th:text="${pageNumber+1}">3</a></li>
+
+        </th:block>
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
