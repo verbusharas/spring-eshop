@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link th:href="@{/static/css/style.css}" rel="stylesheet"/>
-    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title th:text="#{product.rename.title}">Keisti produkto pavadinimą</title>
 </head>
+<div th:replace="fragments/head"></div>
+
 <body>
+<div th:replace="fragments/main :: menu"></div>
 
 <div class="parent-container">
 <form th:action="@{/product/edit-name}" method="POST" th:object="${product}">
@@ -18,11 +18,12 @@
                 <label th:text="#{product.table.name}" for="tfName">Pavadinimas:</label>
                 <input class="form-control" id="tfName" type="text" th:field="*{name}" th:value="*{name}" required/><br/>
             </div>
-            <button class="btn btn-primary" type="submit" th:text="#{product.edit.save}"></button>
+            <div th:replace="fragments/main :: submit-button (txt=#{product.edit.save})"></div>
         </div>
 </form>
 </div>
 
+<div th:replace="fragments/main :: footer"></div>
 
 </body>
 </html>

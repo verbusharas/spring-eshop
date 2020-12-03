@@ -1,7 +1,9 @@
 package lt.verbus.eshop.product.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "Products")
 public class Product {
@@ -42,4 +45,5 @@ public class Product {
     @Column(name = "description")
     @Size(min = 5, max = 255, message = "{product.description.size}")
     private String description;
+
 }

@@ -1,5 +1,6 @@
 package lt.verbus.eshop.product.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import lt.verbus.eshop.product.exception.ProductNotFoundException;
 import lt.verbus.eshop.product.model.Product;
 import lt.verbus.eshop.product.service.ProductService;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-
+@Slf4j
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -30,7 +32,7 @@ public class ProductController {
 
 
     @GetMapping
-    public String getAllProducts(@PageableDefault(size=7) Pageable pageable, Model model) {
+    public String getAllProducts(@PageableDefault(size=5) Pageable pageable, Model model) {
         Page<Product> pageOfProducts = productService.getPageOfProducts(pageable);
         model.addAttribute("productsPage", pageOfProducts);
         return "product/product-list";
@@ -54,6 +56,7 @@ public class ProductController {
             return "product/new-product";
         }
         productService.saveOrUpdateProduct(product);
+        log.info("New Product created: {}", product);
         return "redirect:/product/" + product.getId();
     }
 

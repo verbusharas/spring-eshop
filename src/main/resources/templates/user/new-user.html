@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title th:text="#{user.new.title}">Naujo Vartotojo Pridėjimas</title>
 </head>
+<div th:replace="fragments/head"></div>
+
 <body>
+<div th:replace="fragments/main :: menu"></div>
 
 <div class="parent-container">
     <form th:action="@{/user}" method="POST" th:object="${user}">
@@ -45,6 +45,7 @@
     </form>
 </div>
 
+<div th:replace="fragments/main :: footer"></div>
 
 </body>
 </html>

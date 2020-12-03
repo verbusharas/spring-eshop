@@ -1,0 +1,27 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="default (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}"
+     class="container d-flex justify-content-end">
+    <a th:href="*{url}">
+        <button class="btn btn-bg bg-warning" th:text="*{text}"></button>
+    </a>
+</div>
+
+<div th:fragment="submit-button (txt)" th:assert="${!#strings.isEmpty(txt)}">
+    <a>
+        <button class="btn btn-bg bg-warning" type="submit" th:text="${txt}"></button>
+    </a>
+</div>
+
+<th:block th:fragment="icon (url, icon)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(icon)}">
+    <a class="btn text-warning" th:href="${url} + *{id}" th:switch="${icon}">
+        <i th:case="'RENAME'" class="fas fa-pencil-alt"></i>
+        <i th:case="'EDIT'" class="fas fa-edit"></i>
+        <i th:case="'DELETE'" class="fas fa-trash-alt"></i>
+        <i th:case="*">  <!--            default case here --></i>
+    </a>
+</th:block>
+
+
+
+</html>

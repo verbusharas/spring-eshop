@@ -1,0 +1,27 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="header (field, text, sorting)">
+    <!--    <a class="btn text-warning" th:href="${field} + ${text}">-->
+    <!--        <span th:if="${sorting} == true" th:text="${sorting}?'sortinam':'nesortinam'"></span>-->
+    <!--    </a>-->
+
+
+    <th scope="col">
+        <a class="btn text-light font-weight-bold"
+           th:with="direction=*{sort.getOrderFor(field)?.direction}"
+           th:href="@{?sort={field},{dir}(field = ${field}, dir=${param.sort} )}">
+        <!--       th:href="@{?sort=inStock,{dir}(dir=${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">-->
+        <span th:text="${text}">
+                        Kiekis
+                    </span>
+        <i th:if="${direction != null}"
+           class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+        </a>
+    </th>
+
+
+</th:block>
+
+
+</html>
+

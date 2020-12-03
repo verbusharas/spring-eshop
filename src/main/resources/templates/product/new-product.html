@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link th:href="@{/static/css/style.css}" rel="stylesheet"/>
     <title th:text="#{product.new.title}">Naujo Produkto Pridėjimas</title>
-
 </head>
-<body>
+<div th:replace="fragments/head"></div>
 
+<body>
+<div th:replace="fragments/main :: menu"></div>
 
 <div class="parent-container">
     <form th:action="@{/product/new}" method="POST" th:object="${product}">
@@ -36,12 +32,12 @@
                 <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger" role="alert"></div>
 
             </div>
-            <button class="btn btn-primary" type="submit" th:text="#{product.edit.save}">Saugoti</button>
+            <div th:replace="fragments/main :: submit-button (txt=#{product.edit.save})"></div>
         </div>
 
     </form>
 </div>
-
+<div th:replace="fragments/main :: footer"></div>
 
 </body>
 </html>
