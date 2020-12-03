@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Please Log In</title>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+<!--<div th:replace="fragments/head"></div>-->
 <body>
 YOU HAVE TO LOGIN TO ACCESS THIS PAGE
+<form th:action="@{/sign-in}" method="POST">
+    <div class="container-fluid">
+        <h1>Naujas vartotojas</h1>
+
+        <div class="form-group">
+            <label th:text="#{user.new.username}" for="tfUsername" placeholder="Vartotojo vardas">Vartotojo vardas</label>
+            <input class="form-control" id="tfUsername" type="text" name="user"/>
+
+            <label th:text="#{user.new.password}" for="tfPassword" placeholder="Slaptžodis">Slaptažodis</label>
+            <input class="form-control" id="tfPassword" type="password" name="pass"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Saugoti</button>
+    </div>
+</form>
+
+
+
 </body>
 </html>
