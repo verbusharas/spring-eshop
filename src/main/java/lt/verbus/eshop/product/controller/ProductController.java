@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("/product")
@@ -32,7 +36,8 @@ public class ProductController {
 
 
     @GetMapping
-    public String getAllProducts(@PageableDefault(size=5) Pageable pageable, Model model) {
+    public String getAllProducts(@PageableDefault(size=5) Pageable pageable, Model model, HttpSession httpSession) {
+        model.addAttribute("cart", httpSession.getAttribute("cart"));
         Page<Product> pageOfProducts = productService.getPageOfProducts(pageable);
         model.addAttribute("productsPage", pageOfProducts);
         return "product/product-list";

@@ -10,19 +10,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("*/h2/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/h2/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated()
+                    .and()
                 .formLogin()
-                .permitAll()
-                .loginPage("/sign-in")
-                .loginProcessingUrl("/sign-in")
-                .usernameParameter("user")
-                .passwordParameter("pass")
-                .defaultSuccessUrl("/product")
-                .failureUrl("/sign-in?error")
-                .and()
+                    .permitAll()
+                    .loginPage("/sign-in")
+                    .loginProcessingUrl("/sign-in")
+                    .usernameParameter("user")
+                    .passwordParameter("pass")
+                    .defaultSuccessUrl("/product")
+                    .failureUrl("/sign-in?error")
+                    .and()
                 .httpBasic();
+
+        http.csrf().ignoringAntMatchers("/h2/**");
+        http.headers().frameOptions().sameOrigin();
+
     }
 
 }

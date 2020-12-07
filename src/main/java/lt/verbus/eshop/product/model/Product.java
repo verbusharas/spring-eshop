@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -40,7 +41,7 @@ public class Product {
     @Column(name = "price")
     @NotNull(message = "{product.not.null}")
     @Positive(message="{product.price.positive}")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "description")
     @Size(min = 5, max = 255, message = "{product.description.size}")

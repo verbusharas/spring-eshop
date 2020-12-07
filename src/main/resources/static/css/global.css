@@ -11,3 +11,13 @@ main {
     flex:1 0 auto;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+}

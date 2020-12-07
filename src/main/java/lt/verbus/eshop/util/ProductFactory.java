@@ -3,6 +3,7 @@ package lt.verbus.eshop.util;
 import com.github.javafaker.Faker;
 import lt.verbus.eshop.product.model.Product;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ProductFactory {
             Product product = new Product();
             product.setId(initId++);
             product.setName(faker.commerce().productName());
-            product.setPrice(Double.parseDouble(faker.commerce().price()));
+            product.setPrice(BigDecimal.valueOf(Double.parseDouble(faker.commerce().price())));
             product.setDescription("Color: " + faker.commerce().color() + ", material: " + faker.commerce().department() + ", made in " + faker.country().name());
             product.setInStock((int)faker.number().randomNumber(2, false));
             products.add(product);
@@ -32,7 +33,7 @@ public class ProductFactory {
         for (int i = 0; i<quantity; i++) {
             Product product = new Product();
             product.setName(faker.commerce().productName());
-            product.setPrice(Double.parseDouble(faker.commerce().price()));
+            product.setPrice(BigDecimal.valueOf(Double.parseDouble(faker.commerce().price())));
             product.setDescription("Color: " + faker.commerce().color() + ", material: " + faker.commerce().department() + ", made in " + faker.country().name());
             product.setInStock((int)faker.number().randomNumber(2, false));
             products.add(product);
