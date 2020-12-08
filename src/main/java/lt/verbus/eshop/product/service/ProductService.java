@@ -31,6 +31,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public int getTotalProductsInStore(){
+        return productRepository.findAll().size();
+    }
+
+
     public List<Product> saveOrUpdateProduct(Product product){
         productRepository.save(product);
         return getAllProducts();
@@ -38,7 +43,6 @@ public class ProductService {
 
     @Transactional
     public List<Product> renameProduct(Product product){
-//        productRepository.updateNameById(product.getId(), product.getName());
         Product productInDb =  productRepository.getOne(product.getId());
         productInDb.setName(product.getName());
         return getAllProducts();

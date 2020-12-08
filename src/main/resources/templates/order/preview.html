@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Pirkinių krepšelis'">Pirkinių krepšelis</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <p>Uzsakymas! Musu kazkas:<span></span></p>
+    <h1 th:text="'Pirkinių sąrašas:'">Pirkinių sąrašas:</h1>
+    <table class="table table-hover">
+
+        <th:block th:if="${cart.empty}">
+            <p>Pirkinių krepšelis tuščias</p>
+        </th:block>
+        <th:block th:if="${not cart.empty}">
+
+            <tbody>
+            <tr th:each="product: ${cart}">
+                <th scope="row" th:text="${product.id}"></th>
+                <td><a th:href="@{'/product/' + ${product.id}}" class="btn text-info" th:text="${product.name}"></a>
+                </td>
+                <td th:text="${product.price}"></td>
+            </tr>
+            </tbody>
+
+
+        </th:block>
+    </table>
+    <div th:object="${cartTotals}" class="right">
+        <p th:text="'Suma be PVM: ' + *{totalNetto} + ' €'">Suma be PVM: 30.00 €</p>
+        <p th:text="'PVM (21%): ' + *{totalVat}">PVM (20%): 6.00 €</p>
+        <p th:text="'Galutinė suma: ' + *{totalBrutto}">Galutinė suma: 36 €</p>
+    </div>
+
+
+</div>
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>

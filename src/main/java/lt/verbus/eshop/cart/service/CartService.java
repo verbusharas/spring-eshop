@@ -12,7 +12,7 @@ import static lt.verbus.eshop.util.MoneyUtil.VAT;
 
 @Service
 public class CartService {
-    public CartTotals countTotalPrice(List<Product> products) {
+    public CartTotals countTotals(List<Product> products) {
         BigDecimal totalNetto = products.stream()
                 .map(Product::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
