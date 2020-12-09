@@ -25,7 +25,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getUserById(long id){
+    public User getUserById(Long id){
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
@@ -41,8 +41,8 @@ public class UserService {
         userRepository.save(existingUser);
     }
 
-    public User findUserByUsername(String username) {
-        return userRepository.findByUserName(username);
+    public User findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
 

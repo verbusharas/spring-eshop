@@ -39,15 +39,15 @@ public class OrderService {
     /**
      * Creates the order by the given cart products and username.
      */
-    private Order createNewOrder(String username, List<Product> cartProducts){
-        User currentUser = userService.findUserByUsername(username);
+    private Order createNewOrder(String userName, List<Product> cartProducts){
+        User currentUser = userService.findUserByUserName(userName);
         Order order = new Order();
         order.setUser(currentUser);
         order.setProducts(cartProducts);
         return orderRepository.save(order);
     }
 
-    public CartTotals getOrderTotals(Long id) {
+    public CartTotals getOrderTotals(long id) {
         return invoiceService.getPriceByOrderId(id);
     }
 
@@ -55,7 +55,7 @@ public class OrderService {
         return orderRepository.findAll(pageable);
     }
 
-    public Order getOrderById(Long id) {
+    public Order getOrderById(long id) {
         return orderRepository.getOne(id);
     }
 

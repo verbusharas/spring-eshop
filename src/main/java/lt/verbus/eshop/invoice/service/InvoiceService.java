@@ -30,7 +30,7 @@ public class InvoiceService {
     public Long createInvoice(Order createdOrder) {
         var products = createdOrder.getProducts();
         CartTotals cartTotals = cartService.countTotals(products);
-        Long sequenceNo = getNextInvoiceSequence();
+        long sequenceNo = getNextInvoiceSequence();
         Invoice invoice = new Invoice();
         invoice.setCompany(company);
         invoice.setOrder(createdOrder);
@@ -40,7 +40,7 @@ public class InvoiceService {
         return invoiceRepository.save(invoice).getId();
     }
 
-    public Invoice findById(Long id) {
+    public Invoice findById(long id) {
         return invoiceRepository.getOne(id);
     }
 
@@ -48,14 +48,14 @@ public class InvoiceService {
         return invoiceRepository.findAll(pageable);
     }
 
-    public CartTotals getPriceByOrderId(Long id) {
+    public CartTotals getPriceByOrderId(long id) {
         return invoiceRepository.findByOrderId(id).getCartTotals();
     }
 
-    private Long getNextInvoiceSequence() {
+    private long getNextInvoiceSequence() {
         var invoices = invoiceRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         if (invoices.size() == 0) {
-            return 1L;
+            return 1;
         }
         return invoices.get(0).getSequenceNo() + 1;
     }

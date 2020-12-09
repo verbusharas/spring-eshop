@@ -32,7 +32,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public String getAllOrders(@PathVariable Long id, Model model) {
+    public String getAllOrders(@PathVariable long id, Model model) {
         model.addAttribute("order", orderService.getOrderById(id));
         model.addAttribute("price", orderService.getOrderTotals(id));
         return "order/single-order";
@@ -41,7 +41,8 @@ public class OrderController {
     @GetMapping("/preview")
     public String previewOrder(@ModelAttribute("loggedInUser") String username, @ModelAttribute("cartProducts") List<Product> cartProducts, Model model) {
         log.info("User {} placed an order", username);
-        Long invoiceId = orderService.placeOrder(username, cartProducts);
+        long invoiceId = orderService.placeOrder(username, cartProducts);
+        model.addAttribute("invoiceId", invoiceId);
         return "order/success";
     }
 

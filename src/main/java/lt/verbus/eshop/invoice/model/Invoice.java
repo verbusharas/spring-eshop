@@ -36,7 +36,7 @@ public class Invoice {
     @Embedded
     private Company company;
 
-    private Long sequenceNo;
+    private long sequenceNo;
 
     @NotBlank
     private String fullSerialNo;

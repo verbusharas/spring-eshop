@@ -22,7 +22,10 @@ public class Company {
     private String name;
 
     @Value("${number}")
-    private Long number;
+    private long number;
+
+    @Value("${vat}")
+    private Long vat;
 
     @NotBlank
     @Value("${iban}")
