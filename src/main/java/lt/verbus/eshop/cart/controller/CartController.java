@@ -53,9 +53,9 @@ public class CartController {
 
     @GetMapping("/checkout")
     public String checkout(SessionStatus sessionStatus, RedirectAttributes redirectAttributes, @ModelAttribute("cart") List<Product> cart) {
-        redirectAttributes.addAttribute("cartProducts", cart);
-        redirectAttributes.addAttribute("loggedInUser", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
-//        redirectAttributes.addAttribute("cartTotals", cartService.countTotals(cart));
+        redirectAttributes.addFlashAttribute("cartProducts", cart);
+        redirectAttributes.addFlashAttribute("loggedInUser", ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        redirectAttributes.addFlashAttribute("cartTotals", cartService.countTotals(cart));
         sessionStatus.setComplete();
         return "redirect:/order/preview";
     }

@@ -57,7 +57,7 @@ public class InvoiceService {
         if (invoices.size() == 0) {
             return 1;
         }
-        return invoices.get(0).getSequenceNo() + 1;
+        return invoices.get(invoices.size()-1).getSequenceNo() + 1;
     }
 
     private String getFullInvoiceSerialNo(Long sequenceNo) {
