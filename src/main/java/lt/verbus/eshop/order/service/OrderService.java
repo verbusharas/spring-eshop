@@ -31,8 +31,8 @@ public class OrderService {
      * Creates the order by the given name. This function also generates an invoice and returns its ID
      */
     @Transactional
-    public long placeOrder(String username, List<Product> cartProducts){
-        Order createdOrder = createNewOrder(username, cartProducts);
+    public long placeOrder(String userName, List<Product> cartProducts){
+        Order createdOrder = createNewOrder(userName, cartProducts);
         return invoiceService.createInvoice(createdOrder);
     }
 

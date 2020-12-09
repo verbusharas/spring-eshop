@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Užsakymas'">Užsakymas</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <h5 class="card-title">Uzsakymo numeris <span th:text="${order.id}"></span></h5>
+    <p class="card-text">Viso turim produktų: <span th:text="${order.products.size()}"></span> </p>
+
+    <div class="d-flex justify-content-between">
+        <div class="card" style="width: 18rem;" th:each="product : ${order.products}">
+            <div class="card-body">
+                <h5 class="card-title">Prekes pavadinimas <span th:text="${product.name}"></span></h5>
+                <p class="card-text">Kaina: <span th:text="${product.price}"></span> </p>
+            </div>
+        </div>
+    </div>
+
+    <div th:object="${totals}" class="right mt-3">
+        <p>Viso kaina be PVM: <span th:text="*{totalNetto}"></span></p>
+        <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
+        <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
+    </div>
+    <a th:href="@{/invoice}">Rodyti saskaitas</a>
+
+    <div th:replace="fragments/button :: default (url='/order', text='Atgal į uzsakymu sąrašą')"></div>
+
+</div>
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>

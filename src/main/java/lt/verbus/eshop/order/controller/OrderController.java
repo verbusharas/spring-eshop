@@ -34,7 +34,7 @@ public class OrderController {
     @GetMapping("/{id}")
     public String getAllOrders(@PathVariable long id, Model model) {
         model.addAttribute("order", orderService.getOrderById(id));
-        model.addAttribute("price", orderService.getOrderTotals(id));
+        model.addAttribute("totals", orderService.getOrderTotals(id));
         return "order/single-order";
     }
 

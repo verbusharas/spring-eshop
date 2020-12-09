@@ -37,12 +37,12 @@ public class UserService {
         User existingUser = getUserById(id);
         //FIXME: Use mapper or BeanUtil.
         existingUser.setPhone(newUser.getPhone());
-        existingUser.setPhone(newUser.getZip());
+        existingUser.setZip(newUser.getZip());
         userRepository.save(existingUser);
     }
 
-    public User findUserByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public User findUserByUserName(String username) {
+        return userRepository.findByUsername(username);
     }
 
 

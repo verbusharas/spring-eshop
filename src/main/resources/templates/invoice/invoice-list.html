@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Užsakymas'">Užsakymas</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <th:block th:if="${invoicePage.empty}">
+        <div class="alert alert-warning" role="alert">
+            Atsiprasome, jūs neturite atliktu uzsakymu! Saskaita fromuojama tik ivykdzius uzsakyma!
+            <a th:href="@{/product}"><span class="badge badge-primary">Produktai!</span></a>
+        </div>
+    </th:block>
+
+    <th:block th:if="${not invoicePage.empty}">
+        <table class="table">
+            <tr>
+                <th>
+                    <a th:with="direction=${invoicePage.sort.getOrderFor('fullName')?.direction}"
+                       th:href="@{/invoice(sort='fullName,' + ${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
+                        <span th:text="#{product.table.name}">Pavadinimas</span>
+                        <i th:if="${direction != null}"
+                           class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                    </a>
+                </th>
+                <th><span>Sukurimo data</span></th>
+                <th><span>Orderis</span></th>
+            </tr>
+            <tr th:each="invoice : ${invoicePage}">
+                <td><a th:href="@{/invoice/{id}(id=${invoice.id})}"><span th:text="${invoice.fullSerialNo}"></span></a></td>
+                <td th:text="*{invoice.createdAt}" />
+                <td><a th:href="@{/order/{id}(id=${invoice.order.id})}">Rodyti uzsakyma</a></td>
+            </tr>
+        </table>
+
+        <div th:include="fragments/main :: pagination" th:object="${invoicePage}">
+
+</div>
+
+
+
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Pirkinių krepšelis'">Patvirtinkite užsakymą</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        Dėkojame, jūsų užsakymas gautas! <span class="badge badge-success">Dėkojame!</span>
+    </div>
+    <p>Jums taip pat suformuota sąskaita faktūra. Norint ją pažiūrėti, galite spausti apačioje esantį mygtuką </p>
+    <a th:href="@{/invoice/{id}(id=${invoiceId})}"><button class="btn btn-bg bg-success text-white">Rodyti sąskaitą</button></a>
+
+</div>
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>

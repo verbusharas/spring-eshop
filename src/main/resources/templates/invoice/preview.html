@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Užsakymas'">Užsakymas</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <h3 class="text-center" th:text="${invoice.fullSerialNo}"></h3>
+    <h5 class="text-center" th:text="${invoice.createdAt}"></h5>
+    <div class="d-flex justify-content-between">
+        <div id="company" th:object="${invoice.company}">
+            <p th:text="*{name}"></p>
+            <p th:text="*{number}"></p>
+            <p th:text="*{vat}"></p>
+            <p th:text="*{iban}"></p>
+        </div>
+        <div id="user" th:object="${invoice.order}">
+            <p th:text="*{user.username}"></p>
+            <p th:text="*{user.phone}"></p>
+            <p th:text="*{user.phone}"></p>
+        </div>
+    </div>
+    <div th:object="${invoice.cartTotals}" class="right mt-3">
+        <p>Viso kaina be PVM: <span th:text="*{totalNetto}"></span></p>
+        <p>Viso PVM: <span th:text="*{totalVat}"></span></p>
+        <p>Viso kaina su PVM: <span th:text="*{totalBrutto}"></span></p>
+    </div>
+</div>
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>

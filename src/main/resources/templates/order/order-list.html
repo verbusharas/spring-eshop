@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Užsakymas'">Užsakymas</title>
+</head>
+
+<div th:replace="fragments/head"></div>
+
+<body>
+<div th:replace="fragments/main :: menu"></div>
+
+<div class="container">
+    <th:block th:if="${ordersPage.empty}">
+        <div class="alert alert-warning" role="alert">
+            Atsiprasome, jūs neturite atliktu uzsakymu! Pridekite prekiu į krepšelį ir spauskite pirkti!
+            <a th:href="@{/product}"><span class="badge badge-primary">Produktai!</span></a>
+        </div>
+    </th:block>
+
+    <th:block th:if="${not ordersPage.empty}">
+        <table class="table">
+            <tr>
+                <th>
+                    <a th:with="direction=${ordersPage.sort.getOrderFor('id')?.direction}"
+                       th:href="@{/order(sort='id,' + ${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
+                        <span>Order #ID</span>
+                        <i th:if="${direction != null}"
+                           class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+                    </a>
+                </th>
+                <th>Prekiu kiekis</th>
+                <th>Viso suma</th>
+            </tr>
+            <tr th:each="order : ${ordersPage}">
+                <td><a th:href="@{/order/{id}(id=${order.id})}">Rodyti uzsakyma #<span th:text="${order.id}"></span> </a></td>
+                <td th:text="*{order.products.size()}" />
+                <td></td>
+            </tr>
+        </table>
+
+        <div th:include="fragments/main :: pagination" th:object="${ordersPage}">
+        </div>
+
+    </th:block>
+
+
+</div>
+
+
+
+
+<div th:replace="fragments/main :: footer"></div>
+
+</body>
+
+</html>
