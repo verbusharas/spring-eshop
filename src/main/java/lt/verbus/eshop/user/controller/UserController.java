@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/private/user")
 public class UserController {
 
-    private UserService userService;
-    private UserExtraValidator userExtraValidator;
+    private final UserService userService;
+    private final UserExtraValidator userExtraValidator;
 
     public UserController(UserService userService, UserExtraValidator userExtraValidator) {
         this.userService = userService;

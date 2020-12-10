@@ -1,26 +1,28 @@
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
     <i class="fas fa-shopping-cart navbar-brand text-warning"></i>
     <a class="navbar-brand" href="#">ePardė</a>
     <th:block th:if="${cart != null}">
-        <a href = "/cart" class="nav-link text-warning" th:text="${cart.size()}"> </a>
+        <a href="/cart" class="nav-link text-warning" th:text="${cart.size()}"> </a>
     </th:block>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/product' ? 'active':''}">
-                <a class="nav-link" href="/product">Produktai</a>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().contains('/product') ? 'active':''}">
+                <a class="nav-link" href="/public/product">Produktai</a>
             </li>
-            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}">
-                <a class="nav-link" href="/user">Vartotojai</a>
+            <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().contains('/user') ? 'active':''}">
+                <a class="nav-link" href="/private/user">Vartotojai</a>
             </li>
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/cart' ? 'active':''}">
-                <a class="nav-link" href="/cart">Krepselis  <th:block th:if="${cart != null}">(<span th:text="${cart.size()}"></span>)</th:block></a>
+                <a class="nav-link" href="/cart">Krepselis
+                    <th:block th:if="${cart != null}">(<span th:text="${cart.size()}"></span>)</th:block>
+                </a>
             </li>
             <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/invoice' ? 'active':''}">
                 <a class="nav-link" href="/invoice">Saskaitos</a>
@@ -30,24 +32,33 @@
             </li>
 
 
-
             <li class="nav-item">
                 <a class="nav-link" href="/about">Apie</a>
             </li>
         </ul>
-        <span class="navbar-text" th:text="'Ne piniguose laimė, netaupykite!'">
+
+        <form class="inline-form" th:action="@{/logout}" method="post">
+             <span class="navbar-text" th:text="'Ne piniguose laimė, netaupykite!'">
       Ne piniguose laimė, netaupykite!
     </span>
+            <button type="submit" class="btn">Logout</button>
+        </form>
+
     </div>
 </nav>
 
 
-<div th:fragment="default-button (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}" class="container d-flex justify-content-end">
-    <a th:href="*{url}"><button class ="btn btn-bg bg-warning" th:text="*{text}"></button></a>
+<div th:fragment="default-button (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}"
+     class="container d-flex justify-content-end">
+    <a th:href="*{url}">
+        <button class="btn btn-bg bg-warning" th:text="*{text}"></button>
+    </a>
 </div>
 
 <div th:fragment="submit-button (txt)" th:assert="${!#strings.isEmpty(txt)}">
-    <a><button class ="btn btn-bg bg-warning" type="submit" th:text="${txt}"></button></a>
+    <a>
+        <button class="btn btn-bg bg-warning" type="submit" th:text="${txt}"></button>
+    </a>
 </div>
 
 <!--<div th:fragment="pagination (entityName, pageName)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}" class="container d-flex justify-content-end">-->
@@ -74,7 +85,6 @@
     </th:block>
     <span th:text="'Viso: ' + *{totalElements}"></span>
 </div>
-
 
 
 <footer th:fragment="footer" class="footer mt-3 py-3 navbar-dark bg-dark position-bottom position-sticky">

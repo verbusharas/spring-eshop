@@ -32,13 +32,25 @@ VALUES ('Intelligent Wooden Watch', 80, 52.11, 'Color: black, material: Beauty &
        ('Practical Silk Knife', 60, 97.53, 'Color: turquoise, material: Automotive & Sports, made in Peru');
 
 
-INSERT INTO USERS (username, password, phone, zip, avatar)
-VALUES ('admin', 'admin', '+37060011111', 'LT-01110', 'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
-       ('JurgisTheGeorge', '111d0c2d-99d0-4ec9-9e68-0c7a35895ef5', '+37060011111', 'LT-01110',
+INSERT INTO USER (id, username, password, phone, zip, avatar)
+VALUES (1, 'admin', '{bcrypt}$2y$12$w7I7MEqU245PnWr9l29Qr.RlXMt2nIDyDGakaxYlujlk2v0yQjj6G', '+37060011111', 'LT-01110', 'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
+       (2, 'JurgisTheGeorge', 'jurgisthegeorge1', '+37060011111', 'LT-01110',
         'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
-       ('iron_lady', '222d0c2d-99d0-4ec9-9e68-0c7a35895ef6', '+37060022222', 'LT-02220',
+       (3, 'iron_lady', 'ironlady1', '+37060022222', 'LT-02220',
         'https://img.freepik.com/free-vector/comic-pretty-girl-with-gasses-halftone-background_225004-835.jpg'),
-       ('mrpresident', '333d0c2d-99d0-4ec9-9e68-0c7a35895ef7', '+37060033333', 'LT-03330',
+       (4, 'mrpresident', 'mrpresident1', '+37060033333', 'LT-03330',
         'https://i1.sndcdn.com/avatars-000739602577-f2zecu-t500x500.jpg'),
-       ('gulag2021', '444d0c2d-99d0-4ec9-9e68-0c7a35895ef8', '+37060044444', 'LT-04440',
+       (5, 'gulag2021', 'gulag20211', '+37060044444', 'LT-04440',
         'https://avatarfiles.alphacoders.com/224/224752.png');
+
+        INSERT INTO ROLE (id, role_name) VALUES
+        (1, 'ADMIN'),
+        (2, 'USER');
+
+        INSERT INTO USER_ROLE (user_id, role_id) VALUES
+        (1,1),
+        (1,2),
+        (2,2),
+        (3,2),
+        (4,2),
+        (5,2);

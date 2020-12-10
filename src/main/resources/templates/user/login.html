@@ -8,10 +8,10 @@
 </head>
 <!--<div th:replace="fragments/head"></div>-->
 <body>
-YOU HAVE TO LOGIN TO ACCESS THIS PAGE
+
 <form th:action="@{/sign-in}" method="POST">
-    <div class="container-fluid">
-        <h1>Naujas vartotojas</h1>
+    <div class="container">
+        <h1 th:text="#{login.title}">Reikalingas prisijungimas</h1>
 
         <div class="form-group">
             <label th:text="#{user.new.username}" for="tfUsername" placeholder="Vartotojo vardas">Vartotojo vardas</label>
@@ -20,7 +20,8 @@ YOU HAVE TO LOGIN TO ACCESS THIS PAGE
             <label th:text="#{user.new.password}" for="tfPassword" placeholder="Slaptažodis">Slaptažodis</label>
             <input class="form-control" id="tfPassword" type="password" name="pass"/>
         </div>
-        <button class="btn btn-primary" type="submit">Saugoti</button>
+        <button class="btn btn-primary" type="submit" th:text="#{login.button}">Prisijungti</button>
+
     </div>
 </form>
 
