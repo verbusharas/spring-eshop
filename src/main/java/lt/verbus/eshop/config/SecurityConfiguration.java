@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -28,22 +30,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/h2/**", "/sign-in", "/public/**", "/").permitAll()
-                .antMatchers("/private/**").authenticated()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/h2/**", "/sign-in", "/public/**", "/").permitAll()
+                    .antMatchers("/private/**").authenticated()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .permitAll()
-                .loginPage("/sign-in")
-                .loginProcessingUrl("/sign-in")
-                .usernameParameter("user")
-                .passwordParameter("pass")
-                .defaultSuccessUrl("/private/user")
-                .failureUrl("/sign-in?error")
-                .and()
+                    .permitAll()
+                    .loginPage("/sign-in")
+                    .loginProcessingUrl("/sign-in")
+                    .usernameParameter("user")
+                    .passwordParameter("pass")
+                    .defaultSuccessUrl("/private/user")
+                    .failureUrl("/sign-in?error")
+                    .and()
                 .logout()
-                .logoutUrl("/sign-out")
-                .logoutSuccessUrl("/public/product");
+                    .logoutUrl("/sign-out")
+                    .logoutSuccessUrl("/public/product");
 
         http.csrf().ignoringAntMatchers("/h2/**");
         http.headers().frameOptions().sameOrigin();
@@ -53,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity webSecurity) {
         // security disabling line - delete when in production
-        webSecurity.ignoring().antMatchers("/**");
+//        webSecurity.ignoring().antMatchers("/**");
         webSecurity.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 

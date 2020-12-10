@@ -7,6 +7,8 @@ import lt.verbus.eshop.product.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,8 +35,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-
-
     @GetMapping
     public String getAllProducts(@PageableDefault(size=5) Pageable pageable, Model model, HttpSession httpSession) {
         model.addAttribute("cart", httpSession.getAttribute("cart"));
@@ -50,12 +50,15 @@ public class ProductController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getNewProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "product/new-product";
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
+//    @Secured("ROLE_ADMIN") <- alternatyva
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "product/new-product";
