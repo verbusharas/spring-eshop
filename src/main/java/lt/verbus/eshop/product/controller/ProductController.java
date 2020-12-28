@@ -4,10 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import lt.verbus.eshop.product.exception.ProductNotFoundException;
 import lt.verbus.eshop.product.model.Product;
 import lt.verbus.eshop.product.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +18,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @Controller
 @RequestMapping("/public/product")
 public class ProductController {
+
 
     private final ProductService productService;
 
@@ -36,10 +37,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public String getAllProducts(@PageableDefault(size=5) Pageable pageable, Model model, HttpSession httpSession) {
+    public String getAllProducts(@PageableDefault(size = 5) Pageable pageable, Model model, HttpSession httpSession) {
         model.addAttribute("cart", httpSession.getAttribute("cart"));
         Page<Product> pageOfProducts = productService.getPageOfProducts(pageable);
         model.addAttribute("productsPage", pageOfProducts);
+
         return "product/product-list";
     }
 

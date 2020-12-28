@@ -1,4 +1,4 @@
-INSERT INTO PRODUCTS (product_name, in_stock, price, description)
+INSERT INTO products (product_name, in_stock, price, description)
 VALUES ('Intelligent Wooden Watch', 80, 52.11, 'Color: black, material: Beauty & Kids, made in Malaysia'),
        ('Practical Granite Clock', 88, 98.31, 'Color: tan, material: Books, made in Saint Vincent and the Grenadines'),
        ('Synergistic Cotton Bottle', 75, 47.66, 'Color: black, material: Tools, made in Slovenia'),
@@ -32,7 +32,7 @@ VALUES ('Intelligent Wooden Watch', 80, 52.11, 'Color: black, material: Beauty &
        ('Practical Silk Knife', 60, 97.53, 'Color: turquoise, material: Automotive & Sports, made in Peru');
 
 
-INSERT INTO USER (id, username, password, phone, zip, avatar)
+INSERT INTO user (id, username, password, phone, zip, avatar)
 VALUES (1, 'admin', '{bcrypt}$2y$12$w7I7MEqU245PnWr9l29Qr.RlXMt2nIDyDGakaxYlujlk2v0yQjj6G', '+37060011111', 'LT-01110', 'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
        (2, 'JurgisTheGeorge', 'jurgisthegeorge1', '+37060011111', 'LT-01110',
         'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
@@ -43,11 +43,11 @@ VALUES (1, 'admin', '{bcrypt}$2y$12$w7I7MEqU245PnWr9l29Qr.RlXMt2nIDyDGakaxYlujlk
        (5, 'gulag2021', '{bcrypt}$2y$12$aGGM6RbiVGHRwESqJfNnm.pWl.S1V/Nj8lcnb2shP4yxBOPB6YwN2', '+37060044444', 'LT-04440',
         'https://avatarfiles.alphacoders.com/224/224752.png');
 
-        INSERT INTO ROLE (id, role_name) VALUES
+        INSERT INTO role (id, role_name) VALUES
         (1, 'ADMIN'),
         (2, 'USER');
 
-        INSERT INTO USER_ROLE (user_id, role_id) VALUES
+        INSERT INTO user_role (user_id, role_id) VALUES
         (1,1),
         (1,2),
         (2,2),

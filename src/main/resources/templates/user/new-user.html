@@ -9,7 +9,7 @@
 <div th:replace="fragments/main :: menu"></div>
 
 <div class="parent-container">
-    <form th:action="@{/user}" method="POST" th:object="${user}">
+    <form th:action="@{/private/user}" method="POST" th:object="${user}">
 
         <div class="container-fluid">
             <h1 th:text="#{user.new.title}">Naujas vartotojas</h1>

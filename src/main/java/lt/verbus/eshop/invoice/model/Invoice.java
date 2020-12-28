@@ -1,6 +1,9 @@
 package lt.verbus.eshop.invoice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.verbus.eshop.cart.model.CartTotals;
 import lt.verbus.eshop.config.Company;
@@ -19,6 +22,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Invoice {
 

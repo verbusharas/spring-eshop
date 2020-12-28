@@ -16,8 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Configuration
-@Profile("test")
-public class WebMvcConfig implements WebMvcConfigurer {
+@Profile("dev")
+public class WebMvcConfigDev implements WebMvcConfigurer {
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -51,6 +51,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry){
         registry.addViewController("/sign-in").setViewName("user/login");
         registry.addRedirectViewController("/", "/public/product");
+        registry.addRedirectViewController("/h2", "/h2dev");
     }
 
 }

@@ -16,10 +16,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Configuration
-@Profile("test")
-public class WebMvcConfig implements WebMvcConfigurer {
+@Profile("junior")
+public class WebMvcConfigJunior implements WebMvcConfigurer {
 
     @Bean
+    @Profile("junior")
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
         cookieLocaleResolver.setDefaultLocale(new Locale("lt", "LT"));
@@ -27,6 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @Profile("junior")
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("lang");
@@ -40,6 +42,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    @Profile("junior")
     public MessageSource messageSource() {
         ResourceBundleMessageSource resourceBundleMessageSource = new ResourceBundleMessageSource();
         resourceBundleMessageSource.setBasename("i18n/messages");
@@ -51,6 +54,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry){
         registry.addViewController("/sign-in").setViewName("user/login");
         registry.addRedirectViewController("/", "/public/product");
+        registry.addRedirectViewController("/h2", "/h2junior");
     }
 
 }

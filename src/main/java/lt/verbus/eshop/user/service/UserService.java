@@ -1,35 +1,32 @@
 package lt.verbus.eshop.user.service;
 
 import lt.verbus.eshop.user.exception.UserNotFoundException;
+import lt.verbus.eshop.user.model.Role;
 import lt.verbus.eshop.user.model.User;
 import lt.verbus.eshop.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User addUser(User user) {
-        //TODO:user password encoder here..
-        UUID tempPsw = UUID.randomUUID();
-        user.setPassword(tempPsw.toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Set.of(new Role(1L, "USER")));
         return userRepository.save(user);
     }
 
@@ -52,7 +49,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        return userRepository.findWithRolesByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
 
 
         //        return new UserDetails() {

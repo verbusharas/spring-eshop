@@ -1,7 +1,10 @@
 package lt.verbus.eshop.user.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -15,6 +18,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Role implements GrantedAuthority {
 
@@ -27,6 +33,9 @@ public class Role implements GrantedAuthority {
 
     @ManyToMany
     private List<User> users;
+
+    public Role(Long id, String roleName) {
+    }
 
     @Override
     public String getAuthority() {

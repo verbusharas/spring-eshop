@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.verbus.eshop.user.service.validator.LithuanianPhoneNumber;
 import lt.verbus.eshop.user.service.validator.LithuanianZipCode;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
@@ -41,6 +43,9 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
+    @Transient
+    private String passwordConfirm;
+
     @LithuanianPhoneNumber
     private String phone;
 
@@ -50,7 +55,8 @@ public class User implements UserDetails {
     private String avatar;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     @JoinTable(
             name="user_role",
             joinColumns = {@JoinColumn(name = "user_id")},

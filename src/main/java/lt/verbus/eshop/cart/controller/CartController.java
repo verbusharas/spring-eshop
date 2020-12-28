@@ -3,6 +3,7 @@ package lt.verbus.eshop.cart.controller;
 import lt.verbus.eshop.cart.service.CartService;
 import lt.verbus.eshop.product.model.Product;
 import lt.verbus.eshop.product.service.ProductService;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -20,20 +21,27 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
-@SessionAttributes({"cart"})
+@SessionAttributes({"cart", "h2path"})
 public class CartController {
 
     private final ProductService productService;
     private final CartService cartService;
+    private Environment env;
 
-    public CartController(ProductService productService, CartService cartService) {
+    public CartController(ProductService productService, CartService cartService, Environment env) {
         this.productService = productService;
         this.cartService = cartService;
+        this.env = env;
     }
 
     @ModelAttribute("cart")
     public List<Product> cart() {
         return new ArrayList<>();
+    }
+
+    @ModelAttribute("h2path")
+    public String h2path() {
+        return env.getProperty("spring.h2.console.path");
     }
 
     @GetMapping
