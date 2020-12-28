@@ -3,7 +3,6 @@ package lt.verbus.eshop.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -16,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 @Configuration
-@Profile("test")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean

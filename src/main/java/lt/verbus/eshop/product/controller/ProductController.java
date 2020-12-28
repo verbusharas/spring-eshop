@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import javax.validation.Valid;
 
 @Slf4j
@@ -67,7 +66,7 @@ public class ProductController {
         }
         productService.saveOrUpdateProduct(product);
         log.info("New Product created: {}", product);
-        return "redirect:/product/" + product.getId();
+        return "redirect:/public/product/" + product.getId();
     }
 
     @GetMapping("/edit-name/{id}")
@@ -79,7 +78,7 @@ public class ProductController {
     @PostMapping("/edit-name")
     public String updateProductName(@ModelAttribute("product") Product product, Model model) {
         model.addAttribute("products", productService.renameProduct(product));
-        return "redirect:/product/" + product.getId();
+        return "redirect:/public/product/" + product.getId();
     }
 
     @GetMapping("/edit-product/{id}")
@@ -91,13 +90,13 @@ public class ProductController {
     @PostMapping("/edit-product")
     public String updateProduct(@ModelAttribute("product") Product product, Model model) {
         productService.saveOrUpdateProduct(product);
-        return "redirect:/product/" + product.getId();
+        return "redirect:/public/product/" + product.getId();
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable long id, Model model) {
         productService.deleteProduct(getProductById(id));
-        return "redirect:/product";
+        return "redirect:/public/product";
     }
 
     private Product getProductById(long id) {

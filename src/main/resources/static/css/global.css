@@ -21,3 +21,8 @@ main {
     align-items: flex-end;
 
 }
+
+.disabled {
+    pointer-events: none !important;
+    color: aqua !important;
+}

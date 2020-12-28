@@ -56,7 +56,7 @@ public class CartController {
     public String addProductToCart(@PathVariable Long productId, @ModelAttribute("cart") List<Product> cart, Model model){
         Product product = productService.getProductById(productId);
         cart.add(product);
-        return "redirect:/product";
+        return "redirect:/public/product";
     }
 
     @GetMapping("/checkout")

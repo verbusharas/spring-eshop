@@ -38,7 +38,7 @@
             </tr>
         </table>
 
-        <div th:include="fragments/main :: pagination" th:object="${ordersPage}">
+        <div th:include="fragments/main :: pagination (urlPrefix='/order')" th:object="${ordersPage}">
         </div>
 
     </th:block>

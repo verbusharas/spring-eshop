@@ -14,7 +14,7 @@
         <p th:text="#{product.table.price} + ': '+ ${product.getPrice} + ' ' + #{product.currency} + '.'"></p>
         <p th:text="#{product.table.in-stock} + ': ' + ${product.getInStock()} + ' ' + #{product.count} + '.'"></p>
         <p>
-            <a th:href="@{/product}" th:text="#{product.return}"></a>
+            <a th:href="@{/public/product}" th:text="#{product.return}"></a>
         </p>
     </div>
 

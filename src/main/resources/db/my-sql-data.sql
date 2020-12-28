@@ -33,7 +33,7 @@ VALUES ('Intelligent Wooden Watch', 80, 52.11, 'Color: black, material: Beauty &
 
 
 INSERT INTO user (id, username, password, phone, zip, avatar)
-VALUES (1, 'admin', '{bcrypt}$2y$12$w7I7MEqU245PnWr9l29Qr.RlXMt2nIDyDGakaxYlujlk2v0yQjj6G', '+37060011111', 'LT-01110', 'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
+VALUES (1, 'admin', '{bcrypt}$2y$12$w7I7MEqU245PnWr9l29Qr.RlXMt2nIDyDGakaxYlujlk2v0yQjj6G', '+37060011111', 'LT-01110', 'https://pickaface.net/gallery/avatar/unr_admin_171016_2225_zewhi.png'),
        (2, 'JurgisTheGeorge', 'jurgisthegeorge1', '+37060011111', 'LT-01110',
         'https://i1.sndcdn.com/avatars-000563163222-0mmr4k-t500x500.jpg'),
        (3, 'iron_lady', 'ironlady1', '+37060022222', 'LT-02220',

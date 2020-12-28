@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<div sec:authorize="hasRole('ADMIN')" th:fragment="default (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}"
+<div th:fragment="default (url, text)" th:assert="${!#strings.isEmpty(url) and !#strings.isEmpty(text)}"
      class="container d-flex justify-content-end">
     <a th:href="*{url}">
         <button class="btn btn-bg bg-warning" th:text="*{text}"></button>

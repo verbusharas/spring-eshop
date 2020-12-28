@@ -50,7 +50,7 @@ public class UserController {
         }
 
         userService.addUser(user);
-        return "redirect:/private/user";
+        return "redirect:/private/user/" + user.getId();
     }
 
     @GetMapping("/{id}")

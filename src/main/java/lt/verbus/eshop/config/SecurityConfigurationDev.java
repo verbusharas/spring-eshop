@@ -17,7 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("!test")
+/**
+ * DEV profile - with security configured to allow everywhere without authentication
+ */
+@Profile("dev")
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfigurationDev extends WebSecurityConfigurerAdapter {
 

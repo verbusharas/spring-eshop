@@ -9,7 +9,7 @@
 <div th:replace="fragments/main :: menu"></div>
 
 <div class="parent-container">
-<form th:action="@{/product/edit-name}" method="POST" th:object="${product}">
+<form th:action="@{/public/product/edit-name}" method="POST" th:object="${product}">
 
         <div class="container-fluid">
             <h1 th:text="#{product.rename.title}">Keisti produkto pavadinimą</h1>

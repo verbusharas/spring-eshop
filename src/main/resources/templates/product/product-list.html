@@ -34,12 +34,7 @@
                        class="fas" th:classappend="${direction.ascending ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
                 </a>
             </th>
-
-<!--            -&#45;&#45;-->
-<!--            <th:block th:include="fragments/table :: header (field='inStock', text=#{product.table.in-stock}, sorting=true)" th:object="${productsPage}"></th:block>-->
-<!--            -&#45;&#45;-->
             <th scope="col">
-
                 <a class="btn text-light font-weight-bold"
                    th:with="direction=${productsPage.sort.getOrderFor('inStock')?.direction}"
                    th:href="@{?sort=inStock,{dir}(dir=${direction?.name() == 'ASC' ? 'DESC' : 'ASC'})}">
@@ -70,14 +65,6 @@
                 </span>
                 </a>
             </th>
-            <th scope="col">
-                <a class="btn text-warning font-weight-bold" th:href="@{'/product/new'}">
-                <span th:text="'+'">
-                    +
-                </span>
-                </a>
-            </th>
-
         </tr>
         </thead>
 
@@ -85,32 +72,34 @@
             <p>Produktų nėra</p>
         </th:block>
         <th:block th:if="${not productsPage.empty}">
-
             <tbody>
             <tr th:each="product: ${productsPage}">
                 <th scope="row" th:text="${product.id}"></th>
-                <td><a th:href="@{'/product/' + ${product.id}}" class="btn text-info" th:text="${product.name}"></a>
+                <td><a th:href="@{'/public/product/' + ${product.id}}" class="btn text-info"
+                       th:text="${product.name}"></a>
                 </td>
                 <td th:text="${product.inStock} + ' vnt.'"></td>
                 <td th:text="${product.price} + ' €'"></td>
                 <td>
-                    <a th:include="fragments/button :: icon (url='/product/edit-name/', icon='RENAME')"
+                    <a sec:authorize="hasRole('ADMIN')"
+                       th:include="fragments/button :: icon (url='/public/product/edit-name/', icon='RENAME')"
                        th:object="${product}"></a>
-                    <a th:include="fragments/button :: icon (url='/product/edit-product/', icon='EDIT')"
+                    <a sec:authorize="hasRole('ADMIN')"
+                       th:include="fragments/button :: icon (url='/public/product/edit-product/', icon='EDIT')"
                        th:object="${product}"></a>
-                    <a th:include="fragments/button :: icon (url='/product/delete/', icon='DELETE')"
+                    <a sec:authorize="hasRole('ADMIN')"
+                       th:include="fragments/button :: icon (url='/public/product/delete/', icon='DELETE')"
                        th:object="${product}"></a>
                     <a th:include="fragments/button :: icon (url='/cart/add/', icon='CART')"
                        th:object="${product}"></a>
             </tr>
             </tbody>
-
         </th:block>
     </table>
 
-    <div th:replace="fragments/button :: default (url='/product/new', text='Pridėti naują')"></div>
-    <div th:include="fragments/main :: pagination" th:object="${productsPage}">
-    </div>
+    <div sec:authorize="hasRole('ADMIN')"
+         th:replace="fragments/button :: default (url='/public/product/new', text='Pridėti naują')"></div>
+    <div th:include="fragments/main :: pagination (urlPrefix='/public/product/')" th:object="${productsPage}"></div>
 </div>
 <div th:replace="fragments/main :: footer"></div>
 
