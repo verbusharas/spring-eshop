@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -34,13 +35,29 @@ class ProductControllerShould {
     void return_products_page_with_no_products_when_no_products_found() throws Exception {
         // given
         when(productService.getPageOfProducts(PageRequest.of(0, 5))).thenReturn(Page.empty());
+
         // when
         ResultActions aaa = mvc.perform(get("/public/product"))
                 .andExpect(status().isOk())
                 .andExpect((view().name("product/product-list")))
-        .andExpect(content().string(containsString("<p>Produktų nėra</p>")));
-        // TODO pabaigti pagal CA Git
-        // then
+                .andExpect(content().string(containsString("<p>Produktų nėra</p>")));
+    }
+
+    @Test
+    @WithMockUser(roles = {"USER"})
+    void not_allow_to_create_new_product_for_user_role() throws Exception {
+        // when
+        mvc.perform(get("/public/product/new"))
+                .andExpect(status().isForbidden());
+    }
+
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void allow_to_create_new_product_for_admin_role() throws Exception {
+        // when
+        mvc.perform(get("/public/product/new"))
+                .andExpect(status().isOk());
     }
 
 }
