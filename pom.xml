@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>lt.verbus</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>eshop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eshop-ca-spring</name>
     <description>First Spring Project with CodeAcademy</description>
