@@ -4,6 +4,7 @@ import lt.verbus.eshop.user.exception.UserNotFoundException;
 import lt.verbus.eshop.user.model.Role;
 import lt.verbus.eshop.user.model.User;
 import lt.verbus.eshop.user.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
+@Primary
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
