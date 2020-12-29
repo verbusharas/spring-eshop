@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //END TO END TESTING
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestEntityManager
-class SpringCa1ApplicationShould {
+class EshopApplicationShould {
 
 
 //    @Autowired
